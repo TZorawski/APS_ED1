@@ -1,3 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "lista_sentinela"
+
+#define TAMDB 4
+#define TAMTB 4
+
 typedef struct noDado{
     void* dado;
     int tamDado;
@@ -30,3 +38,16 @@ typedef struct {
     unsigned short int tamTabelas;
     unsigned short int qtdeTabelas;
 } Database;
+
+void create_db(char* nome);
+
+void create_db(char* nome){
+    Database* db= (Database*) malloc(sizeof(Database));
+    db->tabelas= (Tabela**) malloc(sizeof(Tabela*)*TAMDB);
+    db->tamTabelas= TAMDB;
+    db->qtdeTabelas= 0;
+}
+
+void insert_dado(Tabela* t, NoAtributo* atr){
+
+}
