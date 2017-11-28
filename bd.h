@@ -1,3 +1,5 @@
+#include <string.h>
+
 typedef struct noDado{
     void* dado;
     int tamDado;
@@ -30,3 +32,23 @@ typedef struct {
     unsigned short int tamTabelas;
     unsigned short int qtdeTabelas;
 } Database;
+
+
+
+/*create table */
+void create_table(char* nome_banco, char* nome_table, char** atributos){
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
