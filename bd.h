@@ -38,7 +38,7 @@ typedef struct {
 /*create table */
 void create_table(char* nome_banco, char* nome_table, char** atributos){
 
-
+    int b;
 
 
 
