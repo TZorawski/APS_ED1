@@ -51,3 +51,17 @@ void create_db(char* nome){
 void insert_dado(Tabela* t, NoAtributo* atr){
 
 }
+
+Tabela* create_table(char* nome_bd, char* nome_tb, char** atr){
+
+    int tam = strlen(nome_tb);
+
+
+}
+
+
+
+
+
+
+
