@@ -73,7 +73,7 @@ void lista_insere(Lista* l, T* elemento, int posicao){
 }
 
 void lista_insere_fim(Lista* l, T* elemento){
-    No* novo= (No*) malloc(sizeof(No));
+    No* novo = (No*) malloc(sizeof(No));
     novo->dado= copiar(elemento);
     insere_antes(l->sentinela, novo);
     l->qtde++;

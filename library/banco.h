@@ -1,5 +1,5 @@
 #include "lib.h"
-#include "tabela.h"
+
 
 #define TAMDB 4
 

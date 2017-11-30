@@ -1,6 +1,7 @@
 #include "lib.h"
+//#include "banco.h"
+#include "dado.h"
 #include "atributo.h"
-
 
 
 typedef struct {
@@ -10,6 +11,34 @@ typedef struct {
     unsigned short int tamTuplas;
     unsigned short int qtdeTuplas;
 } Tabela;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+NoDado* dado_criar(Tabela* tabela, char** vet_dado, int vet_tam){
+    NoDado* new_noDado = dado_novo("sentinela");
+
+    for(int i=0; i < vet_tam; i++){
+        new_noDado->dado[i];
+    }
+    return new_noDado;
+}
+
+*/
+
 
 
 
