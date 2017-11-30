@@ -10,11 +10,9 @@ typedef struct {
 }Tabela;
 
 
-
 Tabela* tabela_vazia(char* nome){
 
     Tabela* new_table = (Tabela*)malloc(sizeof(Tabela));
-
     strcpy(new_table->nome,nome);
     new_table->qtdeTuplas = 0;
     new_table->tamTuplas = tam_tupla;
@@ -23,9 +21,8 @@ Tabela* tabela_vazia(char* nome){
 
     return new_table;
 
-
-
 }
+
 
 Tabela* tabela_criar(char* nome, int tam_vet, char vet_nome[][30], char vet_tipo[][30]){
 
@@ -33,7 +30,6 @@ Tabela* tabela_criar(char* nome, int tam_vet, char vet_nome[][30], char vet_tipo
     new_table->atributos = atributo_criar(tam_vet, vet_nome, vet_tipo);
 
 }
-
 
 void tabela_imprimir(Tabela* table){
 

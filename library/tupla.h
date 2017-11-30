@@ -1,51 +1,49 @@
 #include "dado.h"
 
-//typedef struct{
-//
-//    NoDado* sentilena;
-//
-//}
+//tabela->tuplas[Tabela->qtdeTuplas] = tuplas_criar()
+//Tabela->qtdeTupla++;
 
-tabela->tuplas[Tabela->qtdeTuplas] = tuplas_criar()
-Tabela->qtdeTupla++;
+void tupla_inserir(NoDado* sent_tupla, char* dado){
 
-NoDado* tuplas_criar(char** dados, int tam_tupla){
+    NoDado* novo_dado = dado_criar(dado);
 
-    NoDado* new_tupla = dado_criar("sentinela");
+    novo_dado->esq = sent_tupla->esq;
+    novo_dado->dir = sent_tupla;
+    sent_tupla->esq = novo_dado;
+    novo_dado->esq->dir = novo_dado;
+
+}
+
+NoDado* tuplas_criar(char vet_dados[][30],int tam_tupla){
+
+    NoDado* new_tupla_sent = dado_criar("sentinela");
     /*replicar o codigo!*/
-
-
-
-
-
-}
-
-tupla_inserir
-/*
-NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30]){
-    NoAtributo* new_atributo = Atributo("Sentinela", "NULL");
-//    for(int i =0; i<tam_vet; i++){
-//        printf("%s\n%s\n", vet_nome[i], vet_tipo[i]);
-//    }
-
-    for(int i =0; i< tam_vet; i++){
-        atributo_inserir(new_atributo,vet_nome[i],vet_tipo[i]);
+    for(int i = 0; i < tam_tupla; i++){
+        tupla_inserir(new_tupla_sent, vet_dados[i]);
     }
-
-    new_atributo->valores = NULL;
-
-   return new_atributo; // retornando o atributo para a tabela
+    return new_tupla_sent;
 }
 
 
-void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo){
+void tupla_imprimir(NoDado* sent_tupla){
 
-    NoAtributo* novo = Atributo(nome, tipo);
-    novo->esq = sent_atr->esq;
-    novo->dir = sent_atr;
-    sent_atr->esq->dir = novo;
-    sent_atr->esq = novo;
-    novo->valores = dado_criar("sentinela");
+    printf("\n DADOS DA TUPLA: \n");
+    NoDado* aux = sent_tupla->dir;
+    while(aux != sent_tupla){
+        printf(" %s \n",aux->dado);
+        aux = aux->dir;
+    }
 }
 
-*/
+void tupla_destruir(NoDado* sen_tupla){
+    NoDado* aux = sen_tupla->dir;
+    while(aux != sen_tupla){
+        aux = aux->dir;
+        dado_deletar(aux->esq);
+    }
+    free(sen_tupla);
+    sen_tupla = NULL;
+}
+
+
+

@@ -10,11 +10,14 @@ typedef struct noAtributo{
 } NoAtributo;
 
 NoAtributo* Atributo(char* nome, char* tipo);
+void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo);
+
 //NoAtributo* atributo_criar(int tam_vet,char (*vet_nome)[tam_vet],char (*vet_tipo)[tam_vet]);
 //NoAtributo* atributo_criar(int tam_vet, int col, char vet_nome[tam_vet][col],char vet_tipo[tam_vet][col]);
+
 NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30]);
 //NoAtributo* atributo_criar(int tam_vet, char **vet_nome,char vet_tipo[][30]);
-void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo);
+
 void atributo_destruir(NoAtributo* sent_atr);
 
 
@@ -31,11 +34,11 @@ NoAtributo* Atributo(char* nome, char* tipo){
     return new_atributo;
 }
 
-void atributo_imprimir(NoAtributo* NA){
+void atributo_imprimir(NoAtributo* sent_atr){
 
     printf("\n\n # ATRUBUTOS: \n");
-    NoAtributo* aux = NA->dir;
-    while(aux!=NA){
+    NoAtributo* aux = sent_atr->dir;
+    while(aux != sent_atr){
         printf("Nome: %s  -  Tipo: %s\n", aux->nome, aux->tipo);
         aux = aux->dir;
     }
@@ -52,9 +55,9 @@ NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30])
     }
 
     new_atributo->valores = NULL;
-
-   return new_atributo; // retornando o atributo para a tabela
+    return new_atributo; // retornando o atributo para a tabela
 }
+
 
 
 void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo){
@@ -62,15 +65,14 @@ void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo){
     NoAtributo* novo = Atributo(nome, tipo);
     novo->esq = sent_atr->esq;
     novo->dir = sent_atr;
-    sent_atr->esq->dir = novo;
     sent_atr->esq = novo;
+    novo->esq->dir = novo;
     novo->valores = dado_criar("sentinela");
 }
 
 void atributo_destruir(NoAtributo* sent_atr){
 
     NoAtributo* aux = sent_atr->dir;
-
     while(aux != sent_atr){
         aux = aux->dir;
         dado_deletar(aux->esq->valores);

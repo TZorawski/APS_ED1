@@ -23,6 +23,7 @@ void create_db(char* nome){
 
 void insert_dado(Tabela* t, NoAtributo* atr){
 
+
 }
 
 
