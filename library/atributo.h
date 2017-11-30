@@ -1,5 +1,3 @@
-#include "lib.h"
-//#include "tabela.h"
 #include "dado.h"
 
 
@@ -10,6 +8,16 @@ typedef struct noAtributo{
     struct noAtributo* dir;
     struct noAtributo* esq;
 } NoAtributo;
+
+NoAtributo* Atributo(char* nome, char* tipo);
+//NoAtributo* atributo_criar(int tam_vet,char (*vet_nome)[tam_vet],char (*vet_tipo)[tam_vet]);
+//NoAtributo* atributo_criar(int tam_vet, int col, char vet_nome[tam_vet][col],char vet_tipo[tam_vet][col]);
+NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30]);
+//NoAtributo* atributo_criar(int tam_vet, char **vet_nome,char vet_tipo[][30]);
+void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo);
+void atributo_destruir(NoAtributo* sent_atr);
+
+
 
 NoAtributo* Atributo(char* nome, char* tipo){
     NoAtributo* new_atributo = (NoAtributo*)malloc(sizeof(NoAtributo));
@@ -23,11 +31,20 @@ NoAtributo* Atributo(char* nome, char* tipo){
     return new_atributo;
 }
 
+void atributo_printar(NoAtributo* NA){
+    NoAtributo* aux = NA->dir;
+    while(aux!=NA){
+        printf("Nome: %s  -  Tipo: %s\n", aux->nome, aux->tipo);
+        aux = aux->dir;
+    }
+}
 
-/*
-NoAtributo* atributo_criar(char** vet_nome,char** vet_tipo,int tam_vet){
-
+NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30]){
     NoAtributo* new_atributo = Atributo("Sentinela", "NULL");
+//    for(int i =0; i<tam_vet; i++){
+//        printf("%s\n%s\n", vet_nome[i], vet_tipo[i]);
+//    }
+
     for(int i =0; i< tam_vet; i++){
         atributo_inserir(new_atributo,vet_nome[i],vet_tipo[i]);
     }
@@ -41,16 +58,13 @@ NoAtributo* atributo_criar(char** vet_nome,char** vet_tipo,int tam_vet){
 void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo){
 
     NoAtributo* novo = Atributo(nome, tipo);
-
     novo->esq = sent_atr->esq;
     novo->dir = sent_atr;
     sent_atr->esq->dir = novo;
     sent_atr->esq = novo;
-
-    novo->valores = dado_criar("sentinela",NULL,0);
-
+    novo->valores = dado_novo("sentinela");
 }
-*/
+
 void atributo_destruir(NoAtributo* sent_atr){
 
     NoAtributo* aux = sent_atr->dir;

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "dado.h"
+#include "atributo.h"
 
 
 int main(){

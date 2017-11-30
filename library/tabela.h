@@ -1,8 +1,5 @@
-#include "lib.h"
-//#include "banco.h"
-#include "dado.h"
 #include "atributo.h"
-
+#define tam_tupla 4
 
 typedef struct {
     char nome[30];
@@ -10,12 +7,39 @@ typedef struct {
     NoDado** tuplas;
     unsigned short int tamTuplas;
     unsigned short int qtdeTuplas;
-} Tabela;
+}Tabela;
 
 
 
+Tabela* tabela_vazia(char* nome){
+
+    Tabela* new_table = (Tabela*)malloc(sizeof(Tabela));
+
+    strcpy(new_table->nome,nome);
+    new_table->qtdeTuplas = 0;
+    new_table->tamTuplas = tam_tupla;
+    new_table->tuplas = NULL;
+    new_table->atributos = NULL;
+
+    return new_table;
+
+}
 
 
+Tabela* table_criar(char* nome, char** vet_nome,char** vet_tipo,int tam_vet){
+
+    Tabela* new_table = tabela_vazia(nome);
+
+    new_table->atributos = atributo_criar(ver_nome, vet_tipo, tam_vet);
+}
+
+
+
+void tabela_destruir(Tabela* tb){/*FALTA COLOCAR OS DADOS DO ATRIBUTO!*/
+
+    free(tb);
+    tb = NULL;
+}
 
 
 

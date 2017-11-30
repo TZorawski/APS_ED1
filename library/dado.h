@@ -1,5 +1,4 @@
 #include "lib.h"
-//#include "atributo.h"
 
 typedef struct noDado{
     void* dado;
@@ -10,6 +9,8 @@ typedef struct noDado{
     struct noDado* baixo;
 }NoDado;
 
+NoDado* dado_novo(char* nome);
+void dado_deletar(NoDado* dado);
 
 NoDado* dado_novo(char* nome){
     NoDado* novo = (NoDado*)malloc(sizeof(NoDado));
