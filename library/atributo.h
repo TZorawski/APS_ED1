@@ -31,7 +31,9 @@ NoAtributo* Atributo(char* nome, char* tipo){
     return new_atributo;
 }
 
-void atributo_printar(NoAtributo* NA){
+void atributo_imprimir(NoAtributo* NA){
+
+    printf("\n\n # ATRUBUTOS: \n");
     NoAtributo* aux = NA->dir;
     while(aux!=NA){
         printf("Nome: %s  -  Tipo: %s\n", aux->nome, aux->tipo);
@@ -62,7 +64,7 @@ void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo){
     novo->dir = sent_atr;
     sent_atr->esq->dir = novo;
     sent_atr->esq = novo;
-    novo->valores = dado_novo("sentinela");
+    novo->valores = dado_criar("sentinela");
 }
 
 void atributo_destruir(NoAtributo* sent_atr){

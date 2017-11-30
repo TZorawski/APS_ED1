@@ -23,64 +23,28 @@ Tabela* tabela_vazia(char* nome){
 
     return new_table;
 
+
+
 }
 
-
-Tabela* table_criar(char* nome, char** vet_nome,char** vet_tipo,int tam_vet){
+Tabela* tabela_criar(char* nome, int tam_vet, char vet_nome[][30], char vet_tipo[][30]){
 
     Tabela* new_table = tabela_vazia(nome);
+    new_table->atributos = atributo_criar(tam_vet, vet_nome, vet_tipo);
 
-    new_table->atributos = atributo_criar(ver_nome, vet_tipo, tam_vet);
 }
 
 
+void tabela_imprimir(Tabela* table){
 
-void tabela_destruir(Tabela* tb){/*FALTA COLOCAR OS DADOS DO ATRIBUTO!*/
+    printf("\n\n # TABELA:  %s",table->nome);
+    atributo_imprimir(table->atributos);
 
-    free(tb);
-    tb = NULL;
 }
 
+void tabela_destruir(Tabela* table){/*FALTA COLOCAR OS DADOS DO ATRIBUTO!*/
 
-
-
-
-
-
-
-
-
-
-/*
-NoDado* dado_criar(Tabela* tabela, char** vet_dado, int vet_tam){
-    NoDado* new_noDado = dado_novo("sentinela");
-
-    for(int i=0; i < vet_tam; i++){
-        new_noDado->dado[i];
-    }
-    return new_noDado;
+    atributo_destruir(table->atributos);
+    free(table);
+    table = NULL;
 }
-
-*/
-
-
-
-
-/// NÃO VAI TER CREATE TABLE PORQUE JA ESTA SENDO CRIADO NO BANCO!
-/*Tabela* create_table(char* nome_tb, char** atr){
-    if(!db)return NULL;
-    if(db->qtdeTabelas >= db->tamTabelas){
-        return NULL;
-    }
-
-    Tabela* new_table = (Tabela*)malloc(sizeof(Tabela));
-    strcpy(new_table->nome,nome_tb);
-
-
-    new_table->qtdeTuplas = 0;
-    new_table->tamTuplas = 4;
-
-    //new_table->atributos = lista_cria();
-
-    //new_table->atributos->dir = new_table->atributos;
-}*/

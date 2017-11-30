@@ -15,7 +15,7 @@ int main(){
 
     NoAtributo* a = atributo_criar(3, nome,tipo);
 
-    atributo_printar(a);
+    atributo_imprimir(a);
     /*
     printf("%s\n", a->nome);
     printf("%s\n", a->tipo);
