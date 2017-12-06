@@ -1,4 +1,4 @@
-#include "dado.h"
+//#include "dado.h"
 
 //tabela->tuplas[Tabela->qtdeTuplas] = tuplas_criar()
 //Tabela->qtdeTupla++;
