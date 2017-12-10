@@ -15,7 +15,7 @@ int main(){
      char tipo[][30] = {{"integer\0"}, {"string\0"}, {"float\0"}};
 
      char atrib2[][30] = {{"cpf\0"}, {"nome\0"}, {"turma\0"}};
-     char tipo2[][30] = {{"integer\0"}, {"string\0"}, {"float\0"}};
+     char tipo2[][30] = {{"integer\0"}, {"string\0"}, {"string\0"}};
 
     banco_criar_tabela(db,nome , atrib, tipo, 3);
     banco_criar_tabela(db,nome2 , atrib2, tipo2, 3);

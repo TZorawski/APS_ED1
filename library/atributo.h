@@ -13,7 +13,7 @@ void atributo_inserir(NoAtributo* sent_atr, char* nome, char* tipo);
 NoAtributo* atributo_criar(int tam_vet, char vet_nome[][30],char vet_tipo[][30]);
 void atributo_destruir(NoAtributo* sent_atr);
 
-/*FUNCOES QUE NAO DERAM CERTO!
+/*FUNCOES QUE NÃO DERAM CERTO!
 //NoAtributo* atributo_criar(int tam_vet,char (*vet_nome)[tam_vet],char (*vet_tipo)[tam_vet]);
 //NoAtributo* atributo_criar(int tam_vet, int col, char vet_nome[tam_vet][col],char vet_tipo[tam_vet][col]);
 //NoAtributo* atributo_criar(int tam_vet, char **vet_nome,char vet_tipo[][30]);
