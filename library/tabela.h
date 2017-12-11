@@ -79,7 +79,6 @@ void tabela_destruir(Tabela* table){/*FALTA COLOCAR OS DADOS DO ATRIBUTO!*/
 /************************* CODIGO DAS TUPLAS ******************************/
 
 void tupla_inserir(NoDado* sent_atr, NoDado* sent_tupla, char* elemento){
-printf("p4\n");
     NoDado* novo_dado = dado_criar(elemento);
     /*********** AGRUPAMDO NA SENTINELA TUPLA *******/
     novo_dado->esq = sent_tupla->esq;
@@ -88,28 +87,24 @@ printf("p4\n");
     novo_dado->esq->dir = novo_dado;
     /*********** F I M  *******/
     /*********** AGRUPAMDO NA SENTINELA VALORES *******/
-    novo_dado->cima = sent_atr->cima;printf("k2\n");
-    novo_dado->baixo = sent_atr;printf("k3\n");
+    novo_dado->cima = sent_atr->cima;
+    novo_dado->baixo = sent_atr;
     sent_atr->cima = novo_dado;
-    novo_dado->cima->baixo = novo_dado;printf("k4\n");
+    novo_dado->cima->baixo = novo_dado;
      /*********** F I M  *******/
 
 }
 
 
 NoDado* tuplas_criar(NoAtributo* sent_pont_atr, char vet_elem[][30],int tam){
-printf("p1\n");
     NoAtributo* sent_ponteiro_atr = sent_pont_atr->dir;
     NoDado* aux_sent_atr = sent_ponteiro_atr->valores;
     NoDado* new_tupla_sent = dado_criar("sentinela\0");
-printf("p2\n");
     for(int i = 0; i < tam; i++){/*for esta adaptado para o fim do codigo*/
         tupla_inserir(aux_sent_atr, new_tupla_sent, vet_elem[i]);//PAR�M: ATRIBUTO/TUPLA/ELEM.
-printf("p5\n");
         sent_ponteiro_atr = sent_ponteiro_atr->dir;
         aux_sent_atr = sent_ponteiro_atr->valores;
     }
-    printf("p6\n");
     return new_tupla_sent;
 }
 

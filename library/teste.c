@@ -27,7 +27,7 @@ void main(){
     Database* bd;
 
 //    while (close<3) {
-    for (int m= 0; m<4; m++) {
+    for (;;) {
 
         printf("GBD ED1: ");
         scanf(" %[^\n]s", inst);
@@ -37,10 +37,11 @@ void main(){
         toLowerCase(inst);
 
         int pos= devolve_pos(inst, comeco);
+
+        if (pos==0) {
+            break;
+        }
         switch (pos) {
-            case 0:
-                close= -1;
-                break;
             case 1:
                 bd= novo_bd(inst, strlen(comeco[1]));
                 break;
@@ -49,6 +50,9 @@ void main(){
                 break;
             case 3:
                 insere_dados(bd, inst, strlen(comeco[3]));
+                break;
+            case 4:
+                //select_dados(bd, inst, strlen(comeco[4]));
                 break;
             case 5:
                 banco_imprimir(bd);
@@ -79,7 +83,7 @@ int devolve_pos(char* s, char comeco[P][L]){
             break;
         }
     }
-    printf("pos: %d\n", pos);
+    //printf("pos: %d\n", pos);
     return pos;
 }
 
