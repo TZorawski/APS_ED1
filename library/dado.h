@@ -35,5 +35,3 @@ void dado_deletar(NoDado* dado){
     free(dado);
     dado =  NULL;
 }
-
-

@@ -1,0 +1,3 @@
+create database Universidade;
+create table Alunos (3, variavel1 tipo1, variavel2 tipo2, ..., varN tipoN);
+insert into Alunos ("Thais", 15, 23.5);

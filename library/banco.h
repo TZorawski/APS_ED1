@@ -23,7 +23,7 @@ Database* banco_criar(char* nome_banco){
     return novo_banco;
 }
 
-void banco_criar_tabela(Database* banco, char* nome_tabela, char atributo[][30], char tipo[][30],int qtd_atr){
+void banco_criar_tabela(Database* banco, char* nome_tabela, char atributo[][30], char tipo[][30], int qtd_atr){
 
     //banco->tabelas = (Tabela**)calloc(banco->tamTabelas,sizeof(Tabela*)); ///VOCE ESTAVA DANDO UM CALLOC EM CIMA DE OUTRO FOI RETIRADO ISSO E COLOCADO ALI EM CIMA
     banco->tabelas[banco->qtdeTabelas] = tabela_criar(nome_tabela,qtd_atr, atributo,tipo);
@@ -37,6 +37,7 @@ Tabela* buscaTabela(Database* banco, char* nome){
             return banco->tabelas[i];
         }
     }
+    printf("sai\n");
     return NULL;
 }
 
@@ -44,7 +45,7 @@ Tabela* buscaTabela(Database* banco, char* nome){
 void banco_inserir_tabela_dados(Database* banco, char* nome, char dados[][30], int qtd_atr){
 
     Tabela* tabela = buscaTabela(banco,nome);
-    if(!tabela){
+    if(tabela==NULL){
         printf("\n\n\n");
         printf("*********************************************************************\n");
         printf("** NAO FOI POSSIVEL LOCALIZAR A TABELA, POR FAVOR TENTE NOVAMENTE! **\n");
@@ -75,8 +76,3 @@ void banco_destruir(Database* banco){
     free(banco);
     banco = NULL;
 }
-
-
-
-
-
