@@ -17,6 +17,7 @@ void zera_string(char* s);
 Database* novo_bd(char inst[I], int p_comeco);
 void nova_tabela(Database* bd, char inst[I], int p_comeco);
 void insere_dados(Database* bd, char inst[I], int p_comeco);
+void select_dados(Database* bd, char inst[I], int p_comeco);
 void trim(char *p);
 
 void main(){
@@ -30,7 +31,7 @@ void main(){
     for (;;) {
 
         printf("GBD ED1: ");
-        scanf(" %[^\n]s", inst);
+        scanf(" %[^;]s", inst);
         __fpurge(stdin);
 
         close++;
@@ -52,7 +53,7 @@ void main(){
                 insere_dados(bd, inst, strlen(comeco[3]));
                 break;
             case 4:
-                //select_dados(bd, inst, strlen(comeco[4]));
+                select_dados(bd, inst, strlen(comeco[4]));
                 break;
             case 5:
                 banco_imprimir(bd);
@@ -211,6 +212,65 @@ void insere_dados(Database* bd, char inst[I], int p_comeco){
         carac+= 2;
     }
     banco_inserir_tabela_dados(bd, nome_tabela, valores, tam);
+}
+
+void select_dados(Database* bd, char inst[I], int p_comeco){
+    char nome_tabela[N];
+    int tam= 1;
+
+    //Get nome #################
+    int carac= p_comeco, j= 0;
+    while (inst[carac]!=' ') {
+        if (inst[carac]==' ' || inst[carac]==';') {
+            nome_tabela[j]= '\0';
+            break;
+        } else {
+            nome_tabela[j]= inst[carac];
+        }
+        carac++;
+        j++;
+    }
+    Tabela* t= buscaTabela(bd, nome_tabela);
+    if (inst[carac-1]==';') {
+        tabela_imprimir(t);
+    } else {
+        //Get valores #################
+        char atributo[N];
+        char operador;
+        char valor[N];
+
+        //Get atributo #################
+        carac++;
+        j= 0;
+        while (inst[carac]!=' ') {
+            if (inst[carac]!=' ') {
+                atributo[j]= inst[carac];
+                j++;
+            }
+            carac++;
+        }
+
+        //Get operador
+        carac+= 2;
+        operador= inst[carac];
+
+        //Get valor
+        j= 0;
+        while (inst[carac]!=')') {
+            if (inst[carac]!='\"') {
+                valor[j]= inst[carac];
+                j++;
+            }
+            carac++;
+        }
+
+        printf("atr: %s\n", atributo);
+        printf("op: %c\n", operador);
+        printf("valor: %s\n", valor);
+    }
+
+
+
 }
 
 void trim(char *p){//tira espacos em branco dos extremos da string
