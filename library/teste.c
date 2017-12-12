@@ -2,9 +2,6 @@
 #include <stdio.h>
 //#include <stdio_ext.h>
 #include <ctype.h>
-#include "lib.h"
-
-
 #include "banco.h"
 
 #define P 6     //Qtde de Palavras
@@ -19,30 +16,25 @@ void select_dados(Database* bd, char inst[I], int p_comeco);
 void toLowerCase(char* s);
 int devolve_pos(char* s, char comeco[P][L]);
 void zera_string(char* s);
+void imprime_funcoes ();
 void trim(char *p);
 
 void main(){
 
     setlocale(LC_ALL,"Portugues");
 
-
     printf("Bem-vindo ao Gerenciador de Banco de Dados ED1\n");
     char comeco[P][L]= {"quit()", "create database ", "create table ", "insert into ", "select * from ", "imprimir()"};
-    char inst[I];
+    char inst[I];//Instrucao
     Database* bd;
+    imprime_funcoes ();
 
     for (;;) {
         zera_string(inst);
         printf("GBD ED1: ");
-<<<<<<< HEAD
         scanf(" %[^\n]s", inst);
         //__fpurge(stdin);
         setbuf(stdin,NULL);
-=======
-        scanf(" %[^;]s", inst);
-        // __fpurge(stdin);
-        fflush(stdin);
->>>>>>> 7206ab2a3ab48fd2482d0349ddd2d6355d4d9f88
 
         toLowerCase(inst);
         inst[strlen(inst)]= ';';
@@ -74,7 +66,7 @@ void main(){
 
         //int k= strlen(inst);
         //printf("%d\n", k);
-        printf("-> %s\n", inst);
+        //printf("-> %s\n", inst);
     }
 }
 
@@ -213,7 +205,7 @@ void insere_dados(Database* bd, char inst[I], int p_comeco){
             carac++;
         }
         valores[i][j]= '\0';
-        printf("%s\n", valores[i]);
+        //printf("%s\n", valores[i]);
         carac+= 2;
     }
     banco_inserir_tabela_dados(bd, nome_tabela, valores, tam);
@@ -225,8 +217,8 @@ void select_dados(Database* bd, char inst[I], int p_comeco){
 
     //Get nome #################
     int carac= p_comeco, j= 0;
-    //while (inst[carac]!=' ' && inst[carac]==';') {
-    while (j<2) {
+    while (inst[carac]!=' ' && inst[carac]!=';') {
+//    while (j<2) {
         nome_tabela[j]= inst[carac];
         j++;
         carac++;
@@ -265,16 +257,29 @@ void select_dados(Database* bd, char inst[I], int p_comeco){
             carac++;
         }
         valor[j]= '\0';
+        trim(valor);
 
         // printf("atr: %s\n", atr);
         // printf("op: %c\n", operador);
         // printf("valor: %s\n", valor);
+        banco_tabela_imprimir_condicional(bd, nome_tabela, atr, operador, valor);
     }
+}
+
+void imprime_funcoes (){
+    printf("\n");
+    printf("+++++++++++++++++++++++\n");
+    printf("create database nome_database;\n");
+    printf("create table nome_tabela (variavel1 tipo1, variavel2 tipo2, ..., varN tipoN);\n");
+    printf("insert into nome_tabela (v1, v2, ..., vn);\n");
+    printf("select * from nome_tabela;\n");
+    printf("select * from nome_tabela where atributo </=/> valor;\n");
+    printf("+++++++++++++++++++++++\n");
+    printf("\n");
 }
 
 void trim(char *p){//tira espacos em branco dos extremos da string
     int len= strlen(p);
-    p[(len-1)]= '\0';
     while(isspace(p[0])!=0){
         len= strlen(p);
         for(int i= 0; i<=len; i++){
