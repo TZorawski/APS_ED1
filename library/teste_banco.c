@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "banco.h"
+#include <locale.h> //necessário para usar setlocale
 
 int main(){
 
 
-
+    setlocale(LC_ALL,"");
 
     Database* db = banco_criar("Universidade\0");
 
@@ -22,7 +23,7 @@ int main(){
 
 
     /*dados do aluno*/
-    char dados[3][30] = {{"1858\0"},{"luiz henrique\0"},{"55\0"}};
+    char dados[3][30] = {{"1858\0"},{"luíz henrique\0"},{"55\0"}};
 
     char dados1[3][30] = {{"1858\0"},{"thais\0"},{"65\0"}};
 

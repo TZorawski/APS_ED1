@@ -23,7 +23,7 @@ void trim(char *p);
 
 void main(){
 
-    setlocale(LC_ALL,"Portugues");
+    setlocale(LC_ALL,"");
 
 
     printf("Bem-vindo ao Gerenciador de Banco de Dados ED1\n");
@@ -34,17 +34,14 @@ void main(){
     for (;;) {
         zera_string(inst);
         printf("GBD ED1: ");
-<<<<<<< HEAD
+
         scanf(" %[^\n]s", inst);
         //__fpurge(stdin);
         setbuf(stdin,NULL);
-=======
-        scanf(" %[^;]s", inst);
-        // __fpurge(stdin);
-        fflush(stdin);
->>>>>>> 7206ab2a3ab48fd2482d0349ddd2d6355d4d9f88
+
 
         toLowerCase(inst);
+
         inst[strlen(inst)]= ';';
         inst[strlen(inst)]= '\0';
 
@@ -74,7 +71,7 @@ void main(){
 
         //int k= strlen(inst);
         //printf("%d\n", k);
-        printf("-> %s\n", inst);
+        //printf("-> %s\n", inst);
     }
 }
 
