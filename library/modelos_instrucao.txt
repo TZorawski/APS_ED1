@@ -1,3 +1,7 @@
 create database Universidade;
-create table Alunos (3, variavel1 tipo1, variavel2 tipo2, ..., varN tipoN);
+create table Alunos (variavel1 tipo1, variavel2 tipo2, ..., varN tipoN);
 insert into Alunos ("Thais", 15, 23.5);
+select * from Alunos;
+select * from Alunos where media = 7.2;
+
+tabela_imprimir_condicional(tb, atrb, cond, valor);

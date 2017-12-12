@@ -12,12 +12,13 @@
 #define I 100   //Tamanho Instrucao
 #define N 30    //Tamanho Nomes
 
-void toLowerCase(char* s);
-int devolve_pos(char* s, char comeco[P][L]);
-void zera_string(char* s);
 Database* novo_bd(char inst[I], int p_comeco);
 void nova_tabela(Database* bd, char inst[I], int p_comeco);
 void insere_dados(Database* bd, char inst[I], int p_comeco);
+void select_dados(Database* bd, char inst[I], int p_comeco);
+void toLowerCase(char* s);
+int devolve_pos(char* s, char comeco[P][L]);
+void zera_string(char* s);
 void trim(char *p);
 
 void main(){
@@ -26,24 +27,28 @@ void main(){
 
 
     printf("Bem-vindo ao Gerenciador de Banco de Dados ED1\n");
-    int close= 0;
     char comeco[P][L]= {"quit()", "create database ", "create table ", "insert into ", "select * from ", "imprimir()"};
     char inst[I];
     Database* bd;
 
-//    while (close<3) {
     for (;;) {
-
+        zera_string(inst);
         printf("GBD ED1: ");
+<<<<<<< HEAD
         scanf(" %[^\n]s", inst);
         //__fpurge(stdin);
         setbuf(stdin,NULL);
+=======
+        scanf(" %[^;]s", inst);
+        // __fpurge(stdin);
+        fflush(stdin);
+>>>>>>> 7206ab2a3ab48fd2482d0349ddd2d6355d4d9f88
 
-        close++;
         toLowerCase(inst);
+        inst[strlen(inst)]= ';';
+        inst[strlen(inst)]= '\0';
 
         int pos= devolve_pos(inst, comeco);
-
         if (pos==0) {
             break;
         }
@@ -58,7 +63,7 @@ void main(){
                 insere_dados(bd, inst, strlen(comeco[3]));
                 break;
             case 4:
-                //select_dados(bd, inst, strlen(comeco[4]));
+                select_dados(bd, inst, strlen(comeco[4]));
                 break;
             case 5:
                 banco_imprimir(bd);
@@ -69,7 +74,7 @@ void main(){
 
         //int k= strlen(inst);
         //printf("%d\n", k);
-        //printf("-> %s\n", inst);
+        printf("-> %s\n", inst);
     }
 }
 
@@ -94,10 +99,10 @@ int devolve_pos(char* s, char comeco[P][L]){
 }
 
 void zera_string(char* s){
-    int tam= strlen(s)-1;
+    int tam= strlen(s);
     //    printf("tam: %d\n", tam);
     for (int i= 0; i<tam; i++) {
-        s[i]= '0';
+        s[i]= '\0';
     }
 }
 
@@ -118,8 +123,7 @@ Database* novo_bd(char inst[I], int p_comeco){
 
 void nova_tabela(Database* bd, char inst[I], int p_comeco){
     char nome_tabela[N];
-    char ctam[3];
-    int itam;
+    int tam= 1;
 
     //Get nome
     int carac, j;
@@ -133,21 +137,17 @@ void nova_tabela(Database* bd, char inst[I], int p_comeco){
     }
 
     //Get tamanho
-    carac+= 2;
-    j= 0;
-    while (inst[carac]!=',') {
-        ctam[j]= inst[carac];
-        carac++;
+    for (j= carac; j<strlen(inst); j++) {
+        if (inst[j]==',') {
+            tam++;
+        }
     }
-    //printf("ctamt: %s\n", ctam);
-    itam= atoi(ctam);
-    //printf("itamt: %d\n", itam);
 
     //Get atributos e tipos
-    char atributos[itam][N];
-    char tipos[itam][N];
+    char atributos[tam][N];
+    char tipos[tam][N];
     carac+= 2;
-    for (int i= 0; i<itam; i++) {
+    for (int i= 0; i<tam; i++) {
         int aux= 0;
         j= 0;
         while (inst[carac]!=',' && inst[carac]!=')') {
@@ -175,7 +175,7 @@ void nova_tabela(Database* bd, char inst[I], int p_comeco){
     }
 
     //Cria Tabela
-    return banco_criar_tabela(bd, nome_tabela, atributos, tipos, itam);
+    return banco_criar_tabela(bd, nome_tabela, atributos, tipos, tam);
 }
 
 void insere_dados(Database* bd, char inst[I], int p_comeco){
@@ -217,6 +217,59 @@ void insere_dados(Database* bd, char inst[I], int p_comeco){
         carac+= 2;
     }
     banco_inserir_tabela_dados(bd, nome_tabela, valores, tam);
+}
+
+void select_dados(Database* bd, char inst[I], int p_comeco){
+    char nome_tabela[N];
+    int tam= 1;
+
+    //Get nome #################
+    int carac= p_comeco, j= 0;
+    //while (inst[carac]!=' ' && inst[carac]==';') {
+    while (j<2) {
+        nome_tabela[j]= inst[carac];
+        j++;
+        carac++;
+    }
+    nome_tabela[j]= '\0';
+    Tabela* t= buscaTabela(bd, nome_tabela);
+    if (inst[carac]==';') {
+        tabela_imprimir(t);
+    } else if (inst[carac]==' ') {
+        char atr[N];
+        char operador;
+        char valor[N];
+
+        //Get atributo #################
+        carac+= 7;
+        j= 0;
+        while (inst[carac]!=' ') {
+            atr[j]= inst[carac];
+            j++;
+            carac++;
+        }
+        atr[j]= '\0';
+
+        //Get operador
+        carac++;
+        operador= inst[carac];
+
+        //Get valor
+        j= 0;
+        carac++;
+        while (inst[carac]!=';') {
+            if (inst[carac]!='\"') {
+                valor[j]= inst[carac];
+                j++;
+            }
+            carac++;
+        }
+        valor[j]= '\0';
+
+        // printf("atr: %s\n", atr);
+        // printf("op: %c\n", operador);
+        // printf("valor: %s\n", valor);
+    }
 }
 
 void trim(char *p){//tira espacos em branco dos extremos da string
