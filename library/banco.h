@@ -8,6 +8,9 @@ typedef struct {
     unsigned short int qtdeTabelas;
 }Database;
 
+
+//void banco_tabela_imprimir_condicional(char* NomeTable,char* NomeAtrib,char* condicao);
+
 Database* banco_criar(char* nome_banco){
 
     Database* novo_banco = (Database*)malloc(sizeof(Database));
@@ -76,3 +79,24 @@ void banco_destruir(Database* banco){
     free(banco);
     banco = NULL;
 }
+
+
+
+/*** FUNÇÃO NOVA ***/
+void banco_tabela_imprimir_condicional(Database* banc, char* NomeTable,char* NomeAtrib, char condicao,char* elem_comparado){
+
+    Tabela* table = buscaTabela(banc,NomeTable);
+
+    if(table == NULL){
+        printf("\n\n\n");
+        printf("*********************************************************************\n");
+        printf("** NAO FOI POSSIVEL LOCALIZAR A TABELA, POR FAVOR TENTE NOVAMENTE! **\n");
+        printf("*********************************************************************\n");
+
+        return;
+    }
+   // printf("\n\npassou pela tabela");
+    tabela_imprimir_condicional(table,NomeAtrib,condicao,elem_comparado);
+}
+/*** FIM ***/
+

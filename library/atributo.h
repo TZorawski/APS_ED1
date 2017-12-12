@@ -79,3 +79,25 @@ void atributo_destruir(NoAtributo* sent_atr){
     free(sent_atr);
     sent_atr = NULL;
 }
+
+
+NoAtributo* atributo_consultar(NoAtributo* sent_atr, char* consulta){
+
+    NoAtributo* aux = sent_atr->dir;
+
+    while(aux != sent_atr){
+
+        if(strcmp(consulta,aux->nome) == 0){
+            return aux;
+        }
+        aux= aux->dir;
+    }
+    return NULL;
+}
+
+
+
+
+
+
+

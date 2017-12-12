@@ -71,7 +71,67 @@ void tabela_destruir(Tabela* table){/*FALTA COLOCAR OS DADOS DO ATRIBUTO!*/
     free(table);
     table = NULL;
 }
+/***  select * from banco.aluno where nomeAlun = "Maria White";    **/
 
+void tabela_imprimir_condicional(Tabela* table, char* NomeAtrib, char condicao, char* elem_comparado){
+
+
+    NoAtributo* atrib = atributo_consultar(table->atributos,NomeAtrib);
+    if(atrib == NULL){
+        printf("\n\n ERRO! : NAO FOI POSSIVEL ENCONTRAR O ATRIBUTO! \n\n");
+        return;
+    }
+    int cont = 0;
+    NoDado* aux2 = atrib->valores->baixo;
+
+    for(int i = 0; i < table->qtdeTuplas; i++){
+
+        NoDado* aux1 = table->tuplas[i];
+        char* dado = (char*)aux2->elemento;
+
+//        if(strcmp(dado,elem_comparado)== 0){
+//            cont = 1;
+//            tupla_imprimir(aux1);
+//        }
+////        aux1 = aux1->dir; nao pe utilizável!
+
+        switch(condicao){
+
+            case '=':{
+                if(strcmp(dado,elem_comparado)== 0){
+                    cont = 1;
+                    tupla_imprimir(aux1);
+                }
+                break;
+            }
+
+            case '>':{
+                /***FUNCAO FUTURA: VERIFICAR SE É INTEIRO OU FLOAT PARA COMPARAR SE É MAIOR!***/
+                if(strcmp(dado,elem_comparado)== 1){
+                    cont = 1;
+                    tupla_imprimir(aux1);
+                }
+                break;
+            }
+
+            case '<':{
+                /***FUNCAO FUTURA: VERIFICAR SE É INTEIRO OU FLOAT PARA COMPARAR SE É MENOR!***/
+                if(strcmp(dado,elem_comparado)== -1){
+                    cont = 1;
+                    tupla_imprimir(aux1);
+
+                }
+                break;
+            }
+        }
+        aux2 = aux2->baixo;
+    }
+
+    if(cont == 0){
+        printf("\n\n ERRO! : NAO FOI POSSIVEL ENCONTRAR O(A) [ %s ]  =  [ %s ]! \n\n",NomeAtrib,elem_comparado);
+        return;
+    }
+}
 /******************************** FIM *************************************/
 
 

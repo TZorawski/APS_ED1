@@ -1,8 +1,9 @@
+
 #include <stdio.h>
-#include <stdio_ext.h>
+//#include <stdio_ext.h>
 #include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
+#include "lib.h"
+
 
 #include "banco.h"
 
@@ -20,6 +21,10 @@ void insere_dados(Database* bd, char inst[I], int p_comeco);
 void trim(char *p);
 
 void main(){
+
+    setlocale(LC_ALL,"Portugues");
+
+
     printf("Bem-vindo ao Gerenciador de Banco de Dados ED1\n");
     int close= 0;
     char comeco[P][L]= {"quit()", "create database ", "create table ", "insert into ", "select * from ", "imprimir()"};
@@ -31,7 +36,8 @@ void main(){
 
         printf("GBD ED1: ");
         scanf(" %[^\n]s", inst);
-        __fpurge(stdin);
+        //__fpurge(stdin);
+        setbuf(stdin,NULL);
 
         close++;
         toLowerCase(inst);
