@@ -1,6 +1,7 @@
 #include "tabela.h"
 #define TAM_TABELA 4
 #define TAM_COL 30
+
 typedef struct {
     char* nome; //char nome[30]; deixei alocado dinamicamente
     Tabela** tabelas;

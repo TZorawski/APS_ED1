@@ -2,7 +2,7 @@
 
 //tabela->tuplas[Tabela->qtdeTuplas] = tuplas_criar()
 //Tabela->qtdeTupla++;
-
+//setlocale(LC_ALL,"Portuguese");
 void tupla_inserir(NoDado* sent_tupla, char* dado){
 
     NoDado* novo_dado = dado_criar(dado);

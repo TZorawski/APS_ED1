@@ -128,7 +128,7 @@ void tabela_imprimir_condicional(Tabela* table, char* NomeAtrib, char condicao, 
     }
 
     if(cont == 0){
-        printf("\n\n ERRO! : NAO FOI POSSIVEL ENCONTRAR O(A) [ %s ]  =  [ %s ]! \n\n",NomeAtrib,elem_comparado);
+        printf("\n\n ERRO! : NAO FOI POSSIVEL ENCONTRAR O(A) [ %s ]  %c  [ %s ]! \n\n",NomeAtrib, condicao, elem_comparado);
         return;
     }
 }

@@ -1,5 +1,6 @@
 #include "dado.h"
 
+
 typedef struct noAtributo{
     char nome[30];
     char tipo[30];
